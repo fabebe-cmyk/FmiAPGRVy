@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Get the download | AI for Grocery at FMI APGR 2027</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-left" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol></defs></svg>
+<a class="skip" href="#main">Skip to content</a>
+<div class="mesh" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<header>
+  <div class="nav">
+    <a class="brand brand-t" href="index.html" aria-label="AI for Grocery — back to the APGR 2027 page"><b>AI for Grocery</b><small>APGR 2027 · Dallas</small></a>
+    <div class="nav-r"><a class="btn cta-n" href="index.html#interest" style="display:inline-flex">Register Your Interest</a></div>
+  </div>
+</header>
+
+<main id="main" class="rpage">
+  <div class="wrap">
+    <a class="back" href="index.html#resources"><svg class="i"><use href="#i-left"/></svg> Back to all resources</a>
+    <div class="rlayout">
+      <aside class="glass rside" id="rside">
+        <img class="cv" id="cv" src="" alt="">
+        <span class="eyebrow">Free from FMI</span>
+        <h1 id="rtitle">Loading…</h1>
+        <p id="rdesc"></p>
+        <p class="from">Published by FMI · Shared by i3 International, an FMI member</p>
+      </aside>
+
+      <section class="glass fpanel" id="panel">
+        <div id="formWrap">
+          <h2 style="font-size:clamp(26px,3vw,36px);margin:0 0 6px">Where should we send it?</h2>
+          <p class="lede" style="margin:0 0 20px">Fill this in and your download opens right away.</p>
+          <form id="gate">
+            <div class="f2"><label>First name<input name="first" required autocomplete="given-name"></label><label>Last name<input name="last" required autocomplete="family-name"></label></div>
+            <label>Work email<input name="email" type="email" required autocomplete="email"></label>
+            <div class="f2"><label>Company<input name="company" required autocomplete="organization"></label><label>Role<input name="role" autocomplete="organization-title"></label></div>
+            <label>I work in<select name="segment"><option>Grocery / food retail</option><option>Convenience &amp; fuel</option><option>Wholesale / distribution</option><option>Solution provider</option><option>Other</option></select></label>
+            <label class="check"><input type="checkbox" name="consent" required><span>I agree to be contacted about FMI APGR 2027 and related resources. For now, inquiries are handled by i3 International, an FMI member.</span></label>
+            <button class="btn" type="submit">Get the download →</button>
+            <p class="fine" id="fine"></p>
+          </form>
+        </div>
+
+        <div class="done" id="done">
+          <span class="eyebrow">You’re in</span>
+          <h2>Your download is ready.</h2>
+          <p class="lede" id="doneLede">Open the resource below.</p>
+          <a class="btn" id="dl" href="#" target="_blank" rel="noopener">Open the resource →</a>
+          <a class="btn ghost" href="index.html#interest">Register Your Interest →</a>
+          <p class="fine" id="doneFine" style="margin-top:18px"></p>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/logos/i3-logo-white.svg" alt="i3 International">
+    <p>This resource is published by FMI. This page was developed by i3 International as an FMI member to support industry education and collaboration around FMI APGR 2027, April 12–15, 2027, Dallas, Texas. It is not an official FMI publication and does not imply FMI endorsement. © i3 International Inc. · <a href="https://www.i3international.com/privacy-policy">Privacy</a> · <a href="https://www.i3international.com/terms-of-use">Terms</a></p>
+  </div>
+</footer>
+
+<script src="resources.js"></script>
+<script>
+(function(){
+  // Set to the URL that should receive the form (CRM / marketing automation). Empty = prototype mode, nothing is sent.
+  var FORM_ENDPOINT='';
+
+  var slug=new URLSearchParams(location.search).get('r');
+  var res=window.RESOURCES.filter(function(x){return x.slug===slug})[0]||null;
+  var cv=document.getElementById('cv');
+  if(!res){
+    document.getElementById('rtitle').textContent='Choose a resource';
+    document.getElementById('rdesc').textContent='That resource wasn’t found. Pick one from the list.';
+    cv.style.display='none';
+    document.getElementById('formWrap').innerHTML='<a class="btn" href="index.html#resources">See all resources →</a>';
+    return;
+  }
+  document.title='Get "'+res.title+'" | AI for Grocery at FMI APGR 2027';
+  document.getElementById('rtitle').textContent=res.title;
+  document.getElementById('rdesc').textContent=res.desc;
+  cv.src=res.cover;cv.alt='Cover of '+res.title;
+
+  var fine=document.getElementById('fine');
+  fine.textContent=FORM_ENDPOINT?'':'Prototype interaction only. Information is not saved or sent.';
+
+  document.getElementById('gate').addEventListener('submit',function(e){
+    e.preventDefault();
+    var data={};new FormData(e.target).forEach(function(v,k){data[k]=v});
+    data.resource=res.slug;data.source='FMI APGR 2027 landing page — lead magnet';
+    function reveal(){
+      document.getElementById('formWrap').style.display='none';
+      var d=document.getElementById('done');d.style.display='block';
+      document.getElementById('dl').href=res.url;
+      document.getElementById('doneLede').textContent='“'+res.title+'” opens in a new tab from FMI.';
+      if(!FORM_ENDPOINT)document.getElementById('doneFine').textContent='Prototype: your details were not saved or sent.';
+      d.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+    if(FORM_ENDPOINT){fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(reveal,reveal)}
+    else reveal();
+  });
+})();
+</script>
+</body>
+</html>
